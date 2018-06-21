@@ -18,7 +18,6 @@ topics=[]
 #subdir='EP-01-07728_0016_'
 
 dirt= '/home/sid/Documents/files/'
-'''
 fh=open("/home/sid/Documents/NewFile1.txt","w")
 fh.write("")
 fh.close()
@@ -35,7 +34,7 @@ while running:
 
     fh.close()
 
-c.unsubscribe()'''
+c.unsubscribe()
 
 fh=open("/home/sid/Documents/NewFile1.txt","r")
 count=fh.readline()

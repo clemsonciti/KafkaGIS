@@ -29,7 +29,10 @@ for files in sorted(listoffiles):
 	f.write(files)
 	f.write("\n")
 f.close()
-'''
+f1=open("/home/sid/Documents/kafka_files/file_meta.txt", "r")
+for data in f1.read():
+	p.produce('meta', data.encode('utf-8'))
+p.flush()
 f=open("/home/sid/Documents/kafka_files/file_meta.txt","r")
 f.readline()
 f.readline()
@@ -54,57 +57,5 @@ while 1:
 		j+=1
 	p.flush()
 f.close()
-'''
-
-f1=open("/home/sid/Documents/kafka_files/file_meta.txt", "r")
-for data in f1.read():
-	p.produce('meta', data.encode('utf-8'))
-p.flush()
 
 
-#shutil.copytree('/home/sid/Documents/EP-01-07728_0016/','/home/sid/Documents/EP-01-07728_0017/')
-
-
-'''
-subdir='EP-01-07728_0016_'
-#Iteration to rename the file and transfer it
-for filename in sorted(os.listdir('/home/sid/Documents/EP-01-07728_0016/')):
-	i=0
-	j=0	
-	num_str=str(num)
-	print(num_str)
-
-	# Changing the File Name
-	g=filename[:17]+num_str+'.JPG'
-	print(filename)
-	g=dir+g
-	filename=dir+filename
-	os.rename(filename,g)
-	print(g)	
-	# Kafka Topic Name for the image
-	topic=subdir+'0000'+num_str
-	#topic=subdir
-	
-	#Opening the file
-	image=open(g,'rb')
-
-	#Fetching the size for the file
-	size=os.path.getsize(g)
-	print(size)
-
-	# Splitting the file into 1 Mb clusters
-	size10kb=size/10240
-
-	#Encode and transfer the clusters
-	while j<size10kb:
-		image.seek(i,0)
-		image_read=image.read(10240)
-		image_64_encode=base64.encodestring(image_read)
-		p.produce(topic, image_64_encode)
-		i+=10240
-		j+=1
-	num=num+1
-
-#Flush the files to Kafka Broker
-	p.flush()
-	'''
