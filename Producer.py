@@ -12,12 +12,13 @@ number_files=len(listoffiles)
 print(number_files)
 num=1
 number_files_str=str(number_files)
-
-
+if not (os.path.exists(os.getcwd()+'/'+'meta')):
+    os.makedirs(os.getcwd()+'/'+'meta')
+metafile=os.getcwd()+'/'+'meta'+'/'+'meta.txt'
 #Writing number of files, the folder name and name of the files into a Text file
-f=open("/home/sid/Documents/kafka_files/file_meta.txt","w")
+f=open(metafile,"w")
 f.close()
-f=open("/home/sid/Documents/kafka_files/file_meta.txt","a")
+f=open(metafile,"a")
 f.write(number_files_str)
 f.write("\n")
 
@@ -29,11 +30,11 @@ for files in sorted(listoffiles):
 	f.write(files)
 	f.write("\n")
 f.close()
-f1=open("/home/sid/Documents/kafka_files/file_meta.txt", "r")
+f1=open(metafile, "r")
 for data in f1.read():
 	p.produce('meta', data.encode('utf-8'))
 p.flush()
-f=open("/home/sid/Documents/kafka_files/file_meta.txt","r")
+f=open(metafile,"r")
 f.readline()
 f.readline()
 while 1:
